@@ -5,7 +5,7 @@ body {
 }
 
 .mosaic {
-  width: 960px;
+  width: 1050px;
   height: 600px;
 
   /* hack - collapse space between inline-block elements */
@@ -23,6 +23,7 @@ body {
 .mosaic-item {
   position: relative;
   display: inline-block;
+  margin:25px;
   width: 300px;
   height: 300px;
 }
