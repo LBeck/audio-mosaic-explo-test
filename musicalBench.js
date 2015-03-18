@@ -3,37 +3,11 @@
 // Source Data
 
 var mosaicItemNames = [
-  "tether", 
-  "HN_tinfoil_light",
-  // "tetherball",
-  // "tinfoil",
-   "switch",
-  "mechanical_finger",
-    // "tape",
-  "tapeDoor",
-  // "tether",
-  "vending2",
-  "vending",
+  
    "musical_chair_circuit"
 
-   // "Yay"
 ]
 
-// var mosaicItemNameMouseon = [
-//   // "tether", 
-//   "musical_chair_circuit_on",
-//   "vending1_on",
-//   // "HN_tinfoil_light1",
-//   // "tetherball",
-//   "tinfoil_on",
-//    // "switch",
-//   "mechanical_finger_on",
-//     "tape_on",
-//   "tapeDoor_on",
-//   "tether_on",
-//   "vending2_on",
-//    "Yay_on"
-// ]
 
 var baseUrl = ""
 // ---

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <link href="style.css" rel="stylesheet" type="text/css"  />
+</head>
+
+<body>
+
+  <div class="mosaic"></div>
+
+<!-- img class="image_on" src="images/about.png" /><img class="image_off" src="images/aboutR.png" alt="logo" />-->
+
+  <script type="text/template" data-template-name="mosaic-item">
+    <div class="mosaic-item">
+      <img class="image_off" src="{{image-url}}" />
+      <img class="image_on" src="{{image-url-on}}"/>
+      <audio src="{{audio-url}}"></audio>
+      <div class="playing">►</div>
+    </div>
+  </script>
+
+  <script type="text/javascript" src="musicalBench.js"></script>
+
+</body>
+</html>
