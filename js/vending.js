@@ -35,11 +35,13 @@ var audioUrl = function(mosaicItemName) {
 }
 
 // Mosaic item template source
+// -- get templage by id
 var mosaicItemTemplate =
   document
-    .querySelector('[data-template-name="mosaic-item"]')
-    .innerText
+    .getElementById('mosaic-item')
+    .innerHTML
     .trim()
+
 
 // ---
 
