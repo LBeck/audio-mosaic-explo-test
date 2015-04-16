@@ -1,31 +1,25 @@
-* { box-sizing: border-box }
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 body {
   background-color: black;
 }
 
 .mosaic {
-  width: 1050px;
-  height: 600px;
-
-  /* hack - collapse space between inline-block elements */
-  font-size: 0;
-
-  /* hack - center div */
+  max-width: 1060px; /* three 300px images + 25px margins */
   margin: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .mosaic-item {
   position: relative;
   display: inline-block;
-  margin:25px;
+  margin: 25px;
   width: 300px;
   height: 300px;
+  background: gray;
 }
 
 .mosaic-item img {
@@ -33,38 +27,17 @@ body {
   height: 300px;
 }
 
-.mosaic .playing {
-  visibility: hidden;
-
-  /* hideous developer graphics */
-  position: absolute;
-  bottom: 4px;
-  left: 4px;
-  height: 19px;
-  width: 19px;
-  font-size: 9px;
-  padding-top: 2px;
-  padding-left: 4px;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  border: 2px solid gray;
-  opacity: 0.7;
+.mosaic-item .stopped {
+   visibility: hidden;
+   position: absolute;
+   display: block;
+   background: url(images/play.svg);
+   height: 40px;
+   width: 40px;
+   top: 260px;
+   left: 20px;
 }
 
-.mosaic-item:hover .playing {
-  visibility: visible;
+.mosaic-item:hover .stopped {
+   visibility: visible;
 }
-
-.mosaic-item.active .playing {
-  visibility: visible;
-}
-
-
-.image_off, .mosaic-item:hover .image_on{
-   display:none
-}
-.image_on, .mosaic-item:hover .image_off{
-   display:block
-}
-
