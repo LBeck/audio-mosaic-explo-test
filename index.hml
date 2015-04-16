@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="reset.css" rel="stylesheet" type="text/css"  />
   <link href="style.css" rel="stylesheet" type="text/css"  />
 </head>
 
@@ -12,11 +15,10 @@
 <!-- img class="image_on" src="images/about.png" /><img class="image_off" src="images/aboutR.png" alt="logo" />-->
 
   <script type="text/template" id="mosaic-item">
-    <div class="mosaic-item">
-      <img class="image_off" src="{{image-url}}" />
-      <img class="image_on" src="{{image-url-on}}"/>
+    <div class="mosaic-item" id="{{mosaic-id}}">
+      <img src="{{image-url}}" />
       <audio src="{{audio-url}}"></audio>
-      <div class="playing">►</div>
+      <div class="stopped"></div>
     </div>
   </script>
 
