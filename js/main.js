@@ -18,7 +18,6 @@ var mosaics = {
   }
 };
 
-
 //-- Mosaic item template source
 var mosaicItemTemplate =
   document
@@ -27,22 +26,22 @@ var mosaicItemTemplate =
     .trim();
 
 // Renders the mosaic item from the HTML template
-var render_mosaic_item = function(m) {
+var render_mosaic_item = function(mosaic, mosaicNum) {
   var html = mosaicItemTemplate;
-  html = html.replace("{{image-url}}", m.images[0]);
-  html = html.replace("{{image-url-on}}", m.images[1]);
-  html = html.replace("{{audio-url}}", m.sound)
+  html = html.replace("{{mosaic-id}}", mosaicNum);
+  html = html.replace("{{image-url}}", mosaic.images[0]);
+  html = html.replace("{{audio-url}}", mosaic.sound)
   return html
 };
 
 // Render all mosaics for page
 var render_mosaics = function() {
   var mosaicHTML = "",
-    mosaicsLength = mosaics.data.length,
+    mosaicsLength = mosaicData.length,
     n;
  
   for(n=0; n < mosaicsLength; n++) {
-    mosaicHTML += render_mosaic_item(mosaics.data[n]) + "\n";
+    mosaicHTML += render_mosaic_item(mosaicData[n], mosaicData[n]["mosaic"]) + "\n";
   }
 
   document.querySelector('.mosaic').innerHTML = mosaicHTML;
@@ -76,7 +75,6 @@ clipPlayer.activeAudioEl = function() {
 
 //-- Events
 window.onload = function () {
-  mosaics.data = mosaicData.slice();
   render_mosaics();
 }
 
