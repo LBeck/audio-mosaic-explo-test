@@ -7,7 +7,7 @@
 
 var mosaicData = [
 {
-"mosaic": "1", 
+"mosaic": "tether", 
 "sound": "sounds/tether.wav",
 "images": [
            "images/mouseon/tether.jpg",
@@ -15,11 +15,35 @@ var mosaicData = [
           ]
 },
 {  
-"mosaic": "2", 
+"mosaic": "HN_tinfoil_light", 
 "sound": "sounds/HN_tinfoil_light.wav",
 "images": [
            "images/mouseon/HN_tinfoil_light.jpg",
            "images/mouseoff/HN_tinfoil_light.jpg"
+          ]
+},
+{  
+"mosaic": "switch", 
+"sound": "sounds/switch.wav",
+"images": [
+           "images/mouseoff/switch.jpg",
+           "images/mouseon/switch.jpg"
+          ]
+},
+{  
+"mosaic": "mechanical_finger", 
+"sound": "sounds/mechanical_finger.wav",
+"images": [
+           "images/mouseoff/mechanical_finger.jpg",
+           "images/mouseon/mechanical_finger.jpg"
+          ]
+},
+{  
+"mosaic": "tapeDoor", 
+"sound": "sounds/tapeDoor.wav",
+"images": [
+           "images/mouseoff/tapeDoor.jpg",
+           "images/mouseon/tapeDoor.jpg"
           ]
 }
 ];
