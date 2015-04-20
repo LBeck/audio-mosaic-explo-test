@@ -19,7 +19,6 @@ body {
   margin: 25px;
   width: 300px;
   height: 300px;
-  background: gray;
 }
 
 .mosaic-item img {
@@ -40,4 +39,19 @@ body {
 
 .mosaic-item:hover .stopped {
    visibility: visible;
+}
+
+.mosaic-item .playing {
+   visibility: visible;
+   position: absolute;
+   display: block;
+   background: url(images/now_playing.svg);
+   height: 40px;
+   width: 40px;
+   top: 260px;
+   left: 20px;
+}
+
+.mosaic-item:hover .playing {
+   background: url(images/stop.svg);
 }
