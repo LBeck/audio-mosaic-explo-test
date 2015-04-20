@@ -14,11 +14,9 @@
 
 * Reset image to image zero when stopped or sound finishes?
 
-* Only allow one
+* Only allow one mosaic item to be active at a time?
 
-* Make site responsive
+* Make site responsive?
 
 * Fade images instead of switch?
-
-
 
