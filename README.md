@@ -1,5 +1,24 @@
-# audio-mosaic-explo-test
+# audio-mosaic-explo-test #
 
-TO DO: figure out how to turn each part of the mosaic into a mini slideshow with 4-5 images instead of just two. 
+## overview ##
 
-BUGS: the pages work on Chrome, but not Firefox -- I think the querySelector expression to get the image template doesn't work in Firefox (ver 36.0.1 on Linux).
+* Main html page is index.html
+
+* Paths to sound and image files specified in data.js
+
+* Click on image to start, or stop, sound.  Images should also begin to switch.
+
+* Multiple sounds/images can be playing at the same time.
+
+## to do ? ##
+
+* Reset image to image zero when stopped or sound finishes?
+
+* Only allow one
+
+* Make site responsive
+
+* Fade images instead of switch?
+
+
+
