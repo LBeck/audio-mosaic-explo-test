@@ -3,10 +3,35 @@
  *
  */
 
+var mosaicMap = {},
+  rotateInterval = 3000;
+
 // --- start the ball rolling
 window.onload = function () {
+  make_mosaic_map();
   render_mosaics();
 }
+
+// --- create map for mosaic name to mosaicData index
+var make_mosaic_map = function() {
+  var mosaicsLength = mosaicData.length,
+    mosaicName,
+    n,
+    m;
+
+  for(n=0; n < mosaicsLength; n++) {
+    m = {};
+    mosaicName = mosaicData[n]["mosaic"];
+
+    m["index"] = n;
+    m["numImages"] = mosaicData[n]["images"].length;
+    m["curImage"] = 0;
+
+    mosaicMap[mosaicName] = m;
+  }
+
+};
+
 
 // --- create individual pic/snd mosaic item
 var create_mosaic_div = function(mosaic, mosaicName) {
@@ -40,11 +65,20 @@ var create_mosaic_div = function(mosaic, mosaicName) {
         mosaicPlayButton.classList.remove("stopped");
         mosaicPlayButton.classList.add("playing");
         mosaicAudio.play();
+
+        // start rotating images
+        mosaicMap[mosaicName]["interval"] = setInterval(function(){
+          rotate_image(mosaicImg);
+          }, rotateInterval);
+
       }
       else {
         mosaicPlayButton.classList.remove("playing");
         mosaicPlayButton.classList.add("stopped");
         mosaicAudio.pause();
+
+        // stop rotating images
+        clearInterval(mosaicMap[mosaicName]["interval"]);
       };
     });
 
@@ -52,6 +86,9 @@ var create_mosaic_div = function(mosaic, mosaicName) {
     mosaicAudio.addEventListener("ended", function() {
       mosaicPlayButton.classList.remove("playing");
       mosaicPlayButton.classList.add("stopped");
+
+      // stop rotating images
+      clearInterval(mosaicMap[mosaicName]["interval"]);
     });
 
     return mosaicDiv;
@@ -66,6 +103,35 @@ var render_mosaics = function() {
  
   for(n=0; n < mosaicsLength; n++) {
     mosaicMain.appendChild(create_mosaic_div(mosaicData[n], mosaicData[n]["mosaic"]));
-  }
+  };
+
+};
+
+
+// -- rotate image
+var rotate_image = function(imageElement) {
+  var cMosaic = imageElement.getAttribute("id").split("-")[1],
+    cMosaicIndex = mosaicMap[cMosaic]["index"],
+    cImage = mosaicMap[cMosaic]["curImage"],
+    nImage = cImage + 1,
+    numImages = mosaicMap[cMosaic]["numImages"];
+
+  if (nImage >= numImages) {
+    // too large, reset
+    nImage = 0;
+  };
+
+// debug
+//
+//   console.log("cMosaic: " + cMosaic);
+//   console.log("cMosaicIndex: " + cMosaicIndex);
+//   console.log("cImage: " + cImage);
+//   console.log("nImage: " + nImage);
+//   console.log("numImages: " + numImages);
+
+  // update image
+  imageElement.src = mosaicData[cMosaicIndex]["images"][nImage];
+  // change curImage to reflect change
+  mosaicMap[cMosaic]["curImage"] = nImage;
 
 };
