@@ -3,88 +3,69 @@
  *
  */
 
-var mosaics = {
-  selected: null,
-  playing: null,
-  data: null,
-  get_sound: function() {
-    return null;
-  },
-  get_images: function() {
-    return null;
-  },
-  log_data: function() {
-    console.log(this.data);
-  }
-};
-
-//-- Mosaic item template source
-var mosaicItemTemplate =
-  document
-    .getElementById('mosaic-item')
-    .innerHTML
-    .trim();
-
-// Renders the mosaic item from the HTML template
-var render_mosaic_item = function(mosaic, mosaicNum) {
-  var html = mosaicItemTemplate;
-  html = html.replace("{{mosaic-id}}", mosaicNum);
-  html = html.replace("{{image-url}}", mosaic.images[0]);
-  html = html.replace("{{audio-url}}", mosaic.sound)
-  return html
-};
-
-// Render all mosaics for page
-var render_mosaics = function() {
-  var mosaicHTML = "",
-    mosaicsLength = mosaicData.length,
-    n;
- 
-  for(n=0; n < mosaicsLength; n++) {
-    mosaicHTML += render_mosaic_item(mosaicData[n], mosaicData[n]["mosaic"]) + "\n";
-  }
-
-  document.querySelector('.mosaic').innerHTML = mosaicHTML;
-};
-
-
-// ---
-
-var clipPlayer = {}
-
-clipPlayer.activeMosaicEl = null
-
-clipPlayer.play = function(mosaicEl) {
-  this.stop()
-  this.activeMosaicEl = mosaicEl
-  this.activeMosaicEl.classList.add('active')
-  this.activeAudioEl().play()
-}
-
-clipPlayer.stop = function() {
-  if (!this.activeMosaicEl) return
-  this.activeMosaicEl.classList.remove('active')
-  this.activeAudioEl().pause()
-  this.activeAudioEl().currentTime = 0
-  this.activeMosaicEl = null
-}
-
-clipPlayer.activeAudioEl = function() {
-  return this.activeMosaicEl.querySelector('audio')
-}
-
-//-- Events
+// --- start the ball rolling
 window.onload = function () {
   render_mosaics();
 }
 
-// Play sounds on click of an image
-document.querySelector('.mosaic').addEventListener('click', function(event){
-  clipPlayer.play(event.target.parentElement)
-})
+// --- create individual pic/snd mosaic item
+var create_mosaic_div = function(mosaic, mosaicName) {
+  var mosaicDiv = document.createElement("div"),
+    mosaicImg = document.createElement("img"),
+    mosaicAudio = document.createElement("audio"),
+    mosaicPlayButton = document.createElement("div");
 
-// Cancel when clicking outside the mosaic (i.e. on html element)
-document.addEventListener('click', function(event) {
-  if (event.target !== document.querySelector('html')) return
-  clipPlayer.stop()
-})
+    // setup main div and append children
+    mosaicDiv.setAttribute("class", "mosaic-item");
+    mosaicDiv.setAttribute("id", mosaicName);
+
+    mosaicDiv.appendChild(mosaicImg);
+    mosaicDiv.appendChild(mosaicAudio);
+    mosaicDiv.appendChild(mosaicPlayButton);
+
+    // setup img, audio, div for button
+    // -- set id's for easy access later
+    mosaicImg.setAttribute("src", mosaic.images[0]);
+    mosaicImg.setAttribute("id", "image-" + mosaicName);
+
+    mosaicAudio.setAttribute("src", mosaic.sound);
+    mosaicAudio.setAttribute("id", "audio-" + mosaicName);
+
+    mosaicPlayButton.setAttribute("class", "stopped");
+    mosaicPlayButton.setAttribute("id", "button-" + mosaicName);
+
+    // start/stop audio with click
+    mosaicDiv.addEventListener("click", function() {
+      if (mosaicPlayButton.classList.contains("stopped")) {
+        mosaicPlayButton.classList.remove("stopped");
+        mosaicPlayButton.classList.add("playing");
+        mosaicAudio.play();
+      }
+      else {
+        mosaicPlayButton.classList.remove("playing");
+        mosaicPlayButton.classList.add("stopped");
+        mosaicAudio.pause();
+      };
+    });
+
+    // when audio ends
+    mosaicAudio.addEventListener("ended", function() {
+      mosaicPlayButton.classList.remove("playing");
+      mosaicPlayButton.classList.add("stopped");
+    });
+
+    return mosaicDiv;
+};
+
+
+// --- create complete mosaic, using mosaicData from data.js
+var render_mosaics = function() {
+  var mosaicMain = document.querySelector(".mosaic"),
+    mosaicsLength = mosaicData.length,
+    n;
+ 
+  for(n=0; n < mosaicsLength; n++) {
+    mosaicMain.appendChild(create_mosaic_div(mosaicData[n], mosaicData[n]["mosaic"]));
+  }
+
+};
